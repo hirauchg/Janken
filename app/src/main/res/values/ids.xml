@@ -2,4 +2,5 @@
 
 <resources>
     <item name="Container" type="id"/>
+    <item name="HighestWinCount" type="id"/>
 </resources>
