@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Janken</string>
+    <string name="highest_win_count">最高連勝数：%1$d回</string>
+    <string name="now_win_count">現在連勝数：%1$d回</string>
+    <string name="call_jan">じゃん</string>
+    <string name="call_ken">けん</string>
+    <string name="call_pon">ぽん</string>
+    <string name="call_ai">あい</string>
+    <string name="call_kode">こで</string>
+    <string name="call_sho">しょ</string>
 </resources>

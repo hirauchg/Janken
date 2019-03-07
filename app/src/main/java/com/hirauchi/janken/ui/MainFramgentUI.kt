@@ -1,17 +1,29 @@
 package com.hirauchi.janken.ui
 
+import android.content.Context
 import android.graphics.Color
+import android.os.Handler
+import android.view.View
+import android.widget.TextView
 import com.hirauchi.janken.fragment.MainFragment
 import org.jetbrains.anko.*
 import com.hirauchi.janken.R
 
 class MainFragmentUI : AnkoComponent<MainFragment> {
 
+    lateinit var mContext: Context
+
+    lateinit var mHighestWinTextView: TextView
+    lateinit var mNowWinTextView: TextView
+    lateinit var mCallTextView: TextView
+
     override fun createView(ui: AnkoContext<MainFragment>) = with(ui) {
+        mContext = ctx
+
         relativeLayout {
             lparams(width = matchParent, height = matchParent)
 
-            textView("最高連勝数：5回"){
+            mHighestWinTextView = textView {
                 id = R.id.HighestWinCount
                 textSize = 16F
                 textColor = Color.BLACK
@@ -21,7 +33,7 @@ class MainFragmentUI : AnkoComponent<MainFragment> {
                 marginEnd = dip(4)
             }
 
-            textView("現在連勝数：2回"){
+            mNowWinTextView = textView {
                 textSize = 16F
                 textColor = Color.BLACK
             }.lparams {
@@ -30,9 +42,10 @@ class MainFragmentUI : AnkoComponent<MainFragment> {
                 marginEnd = dip(4)
             }
 
-            textView("じゃん"){
+            mCallTextView = textView {
                 textSize = 36F
                 textColor = Color.BLACK
+                visibility = View.GONE
             }.lparams {
                 centerHorizontally()
                 topMargin = dip(70)
@@ -63,5 +76,28 @@ class MainFragmentUI : AnkoComponent<MainFragment> {
                 alignParentBottom()
             }
         }
+    }
+
+    fun setWinCount(highestWinCount: Int, nowWinCount: Int) {
+        mHighestWinTextView.text = mContext.getString(R.string.highest_win_count, highestWinCount)
+        mNowWinTextView.text = mContext.getString(R.string.now_win_count, nowWinCount)
+
+    }
+
+    fun callJanken(calls: Array<String>) {
+        val handler = Handler()
+        val r = object : Runnable {
+            var count = 0
+            override fun run() {
+                if (count >= calls.size) {
+                    return
+                }
+                mCallTextView.visibility = View.VISIBLE
+                mCallTextView.text = calls[count]
+                count++
+                handler.postDelayed(this, 1000)
+            }
+        }
+        handler.post(r)
     }
 }
