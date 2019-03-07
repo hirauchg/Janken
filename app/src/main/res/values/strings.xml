@@ -8,4 +8,7 @@
     <string name="call_ai">あい</string>
     <string name="call_kode">こで</string>
     <string name="call_sho">しょ</string>
+    <string name="button_data">データ</string>
+    <string name="button_janken">じゃんけん</string>
+    <string name="button_aiko">あいこ</string>
 </resources>
