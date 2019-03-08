@@ -5,13 +5,25 @@ import android.graphics.Color
 import android.os.Handler
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.hirauchi.janken.fragment.MainFragment
 import org.jetbrains.anko.*
 import com.hirauchi.janken.R
+import kotlinx.coroutines.delay
+import java.util.*
+import android.os.Looper
+
+
 
 class MainFragmentUI : AnkoComponent<MainFragment> {
+
+    companion object {
+        const val ROCK = 0
+        const val SCISSORS = 1
+        const val PAPER = 2
+    }
 
     lateinit var mContext: Context
 
@@ -19,9 +31,12 @@ class MainFragmentUI : AnkoComponent<MainFragment> {
     lateinit var mNowWinTextView: TextView
     lateinit var mCallTextView: TextView
     lateinit var mAppHandImageView: ImageView
+    lateinit var mJankenButton: Button
 
     lateinit var mJankenHandler: Handler
     lateinit var mJankenRunnable: Runnable
+
+    var mIsCalling: Boolean = false
 
     override fun createView(ui: AnkoContext<MainFragment>) = with(ui) {
         mContext = ctx
@@ -63,15 +78,69 @@ class MainFragmentUI : AnkoComponent<MainFragment> {
             }
 
             linearLayout {
+                var tagNumber: Int = 0
                 val handImageList = arrayOf(R.drawable.rock, R.drawable.scissors, R.drawable.paper)
                 handImageList.forEach { it ->
                     imageView(it) {
-                        // ユーザーが手を選択したら、画像の高速切り替えを止める
+                        // tagはユーザーの手の識別に使用する。グーが0、チョキが1、パーが2
+                        tag = tagNumber
+                        tagNumber++
+
                         setOnTouchListener { v, event ->
-                            when (event.action) {
-                                MotionEvent.ACTION_DOWN -> {
-                                    mJankenHandler.removeCallbacks(mJankenRunnable)
-                                    mCallTextView.text = mContext.getText(R.string.call_pon)
+                            if (!mIsCalling && !mJankenButton.isClickable) {
+                                when (event.action) {
+                                    MotionEvent.ACTION_DOWN -> {
+                                        mJankenHandler.removeCallbacks(mJankenRunnable)
+                                        mCallTextView.text = mContext.getString(R.string.call_pon)
+
+                                        // アプリの手。0,1,2のいづれか
+                                        val r = Random().nextInt(3)
+
+                                        // アプリの手を表示
+                                        when (r) {
+                                            ROCK -> mAppHandImageView.setImageResource(R.drawable.rock)
+                                            SCISSORS -> mAppHandImageView.setImageResource(R.drawable.scissors)
+                                            PAPER -> mAppHandImageView.setImageResource(R.drawable.paper)
+                                        }
+
+                                        // ユーザーの手とアプリの手が同じだった場合はあいこ
+                                        if (v.tag == r) {
+                                            toast("あいこ")
+                                            mIsCalling = true
+                                            Handler(Looper.getMainLooper()).postDelayed({
+                                                val calls = arrayOf("", mContext.getString(R.string.call_ai), mContext.getString(R.string.call_kode))
+                                                callJanken(calls)
+                                                changeAppHand(50)
+                                            }, 1000)
+                                            return@setOnTouchListener true
+                                        }
+
+                                        mJankenButton.isClickable = true
+
+                                        when (v.tag) {
+                                            ROCK -> {
+                                                if (r == SCISSORS) {
+                                                    toast("かち")
+                                                } else {
+                                                    toast("まけ")
+                                                }
+                                            }
+                                            SCISSORS -> {
+                                                if (r == ROCK) {
+                                                    toast("まけ")
+                                                } else {
+                                                    toast("かち")
+                                                }
+                                            }
+                                            PAPER -> {
+                                                if (r == ROCK) {
+                                                    toast("かち")
+                                                } else {
+                                                    toast("まけ")
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                             return@setOnTouchListener true
@@ -87,16 +156,15 @@ class MainFragmentUI : AnkoComponent<MainFragment> {
                 button(R.string.button_data){
                     textSize = 20f
                 }.lparams(width = 0, height = 120, weight = 1f)
-                button(R.string.button_janken){
+                mJankenButton = button(R.string.button_janken){
                     textSize = 20f
                     setOnClickListener {
-                        // 掛け声表示
+                        mJankenButton.isClickable = false
+
                         val calls = arrayOf("", mContext.getString(R.string.call_jan), mContext.getString(R.string.call_ken))
                         callJanken(calls)
 
-                        // 2秒間隔表示の停止
                         mJankenHandler.removeCallbacks(mJankenRunnable)
-                        // アプリの手の高速切り替え
                         changeAppHand(50)
                     }
                 }.lparams(width = 0, height = 120, weight = 1f)
@@ -112,11 +180,13 @@ class MainFragmentUI : AnkoComponent<MainFragment> {
     }
 
     fun callJanken(calls: Array<String>) {
+        mIsCalling = true
         val handler = Handler()
         val r = object : Runnable {
             var count = 0
             override fun run() {
                 if (count >= calls.size) {
+                    mIsCalling = false
                     return
                 }
                 mCallTextView.visibility = View.VISIBLE
