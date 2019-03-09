@@ -11,11 +11,8 @@ import android.widget.TextView
 import com.hirauchi.janken.fragment.MainFragment
 import org.jetbrains.anko.*
 import com.hirauchi.janken.R
-import kotlinx.coroutines.delay
 import java.util.*
 import android.os.Looper
-
-
 
 class MainFragmentUI : AnkoComponent<MainFragment> {
 
@@ -82,7 +79,6 @@ class MainFragmentUI : AnkoComponent<MainFragment> {
                 val handImageList = arrayOf(R.drawable.rock, R.drawable.scissors, R.drawable.paper)
                 handImageList.forEach { it ->
                     imageView(it) {
-                        // tagはユーザーの手の識別に使用する。グーが0、チョキが1、パーが2
                         tag = tagNumber
                         tagNumber++
 
@@ -93,17 +89,14 @@ class MainFragmentUI : AnkoComponent<MainFragment> {
                                         mJankenHandler.removeCallbacks(mJankenRunnable)
                                         mCallTextView.text = mContext.getString(R.string.call_pon)
 
-                                        // アプリの手。0,1,2のいづれか
                                         val r = Random().nextInt(3)
 
-                                        // アプリの手を表示
                                         when (r) {
                                             ROCK -> mAppHandImageView.setImageResource(R.drawable.rock)
                                             SCISSORS -> mAppHandImageView.setImageResource(R.drawable.scissors)
                                             PAPER -> mAppHandImageView.setImageResource(R.drawable.paper)
                                         }
 
-                                        // ユーザーの手とアプリの手が同じだった場合はあいこ
                                         if (v.tag == r) {
                                             toast("あいこ")
                                             mIsCalling = true
@@ -155,7 +148,11 @@ class MainFragmentUI : AnkoComponent<MainFragment> {
             linearLayout {
                 button(R.string.button_data){
                     textSize = 20f
+                    setOnClickListener {
+                        ui.owner.moveToJankenData()
+                    }
                 }.lparams(width = 0, height = 120, weight = 1f)
+
                 mJankenButton = button(R.string.button_janken){
                     textSize = 20f
                     setOnClickListener {
