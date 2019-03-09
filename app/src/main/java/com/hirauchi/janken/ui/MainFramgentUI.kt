@@ -98,7 +98,7 @@ class MainFragmentUI : AnkoComponent<MainFragment> {
                                         }
 
                                         if (v.tag == r) {
-                                            toast("あいこ")
+                                            toast(mContext.getString(R.string.janken_draw))
                                             mIsCalling = true
                                             Handler(Looper.getMainLooper()).postDelayed({
                                                 val calls = arrayOf("", mContext.getString(R.string.call_ai), mContext.getString(R.string.call_kode))
@@ -113,23 +113,23 @@ class MainFragmentUI : AnkoComponent<MainFragment> {
                                         when (v.tag) {
                                             ROCK -> {
                                                 if (r == SCISSORS) {
-                                                    toast("かち")
+                                                    toast(mContext.getString(R.string.janken_win))
                                                 } else {
-                                                    toast("まけ")
+                                                    toast(mContext.getString(R.string.janken_lose))
                                                 }
                                             }
                                             SCISSORS -> {
                                                 if (r == ROCK) {
-                                                    toast("まけ")
+                                                    toast(mContext.getString(R.string.janken_lose))
                                                 } else {
-                                                    toast("かち")
+                                                    toast(mContext.getString(R.string.janken_win))
                                                 }
                                             }
                                             PAPER -> {
                                                 if (r == ROCK) {
-                                                    toast("かち")
+                                                    toast(mContext.getString(R.string.janken_win))
                                                 } else {
-                                                    toast("まけ")
+                                                    toast(mContext.getString(R.string.janken_lose))
                                                 }
                                             }
                                         }
