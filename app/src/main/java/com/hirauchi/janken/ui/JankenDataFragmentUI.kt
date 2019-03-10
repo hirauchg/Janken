@@ -113,7 +113,11 @@ class JankenDataFragmentUI : AnkoComponent<JankenDataFragment> {
                 (jankenData.win + jankenData.lose), jankenData.win, jankenData.lose)
         mHighestWinTextView.text = mContext.getString(R.string.data_count, jankenData.highestWin)
         mDrawTextView.text = mContext.getString(R.string.data_count, jankenData.draw)
-        mWinRateTextView.text = mContext.getString(R.string.data_persent, jankenData.winRate)
+        var rate = 0
+        if (jankenData.win + jankenData.lose != 0) {
+            rate = jankenData.win / (jankenData.win + jankenData.lose)
+        }
+        mWinRateTextView.text = mContext.getString(R.string.data_persent, rate)
         mRockCountTextView.text = mContext.getString(R.string.data_count, jankenData.rock)
         mScissorsCountTextView.text = mContext.getString(R.string.data_count, jankenData.scissors)
         mPaperCountTextView.text = mContext.getString(R.string.data_count, jankenData.paper)

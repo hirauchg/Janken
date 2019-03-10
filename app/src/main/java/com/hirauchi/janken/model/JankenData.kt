@@ -1,13 +1,13 @@
 package com.hirauchi.janken.model
 
 data class JankenData(
-        val total: Int,
-        val win: Int,
-        val lose: Int,
-        val draw: Int,
-        val highestWin: Int,
-        val winRate: Int,
-        val rock: Int,
-        val scissors: Int,
-        val paper: Int
+        val id: Int,
+        var win: Int,
+        var lose: Int,
+        var draw: Int,
+        var highestWin: Int,
+        var nowWin: Int,
+        var rock: Int,
+        var scissors: Int,
+        var paper: Int
 )
