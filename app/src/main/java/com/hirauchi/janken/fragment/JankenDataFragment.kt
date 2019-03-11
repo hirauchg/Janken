@@ -27,12 +27,18 @@ class JankenDataFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setJankenData()
+    }
 
-        val jankenDataController = JankenDataController(mContext)
-        val jankenData = jankenDataController.getJankenData()
-        jankenData?.lose = 0
+    fun setJankenData() {
+        val jankenData = JankenDataController(mContext).getJankenData()
         if (jankenData != null) {
             mUI.setJankenData(jankenData)
         }
+    }
+
+    fun resetData() {
+        JankenDataController(mContext).resetData()
+        setJankenData()
     }
 }

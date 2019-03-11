@@ -100,7 +100,11 @@ class JankenDataFragmentUI : AnkoComponent<JankenDataFragment> {
                     }
                 }
 
-                mResetButton = button(R.string.data_reset).lparams {
+                mResetButton = button(R.string.data_reset){
+                    setOnClickListener {
+                        ui.owner.resetData()
+                    }
+                }.lparams {
                     gravity = Gravity.CENTER_HORIZONTAL
                     verticalMargin = dip(20)
                 }
@@ -113,11 +117,12 @@ class JankenDataFragmentUI : AnkoComponent<JankenDataFragment> {
                 (jankenData.win + jankenData.lose), jankenData.win, jankenData.lose)
         mHighestWinTextView.text = mContext.getString(R.string.data_count, jankenData.highestWin)
         mDrawTextView.text = mContext.getString(R.string.data_count, jankenData.draw)
-        var rate = 0
+        var rate = 0.0
         if (jankenData.win + jankenData.lose != 0) {
-            rate = jankenData.win / (jankenData.win + jankenData.lose)
+            rate = jankenData.win.toDouble() / (jankenData.win + jankenData.lose).toDouble()
+            rate *= 100
         }
-        mWinRateTextView.text = mContext.getString(R.string.data_persent, rate)
+        mWinRateTextView.text = mContext.getString(R.string.data_persent, rate.toInt())
         mRockCountTextView.text = mContext.getString(R.string.data_count, jankenData.rock)
         mScissorsCountTextView.text = mContext.getString(R.string.data_count, jankenData.scissors)
         mPaperCountTextView.text = mContext.getString(R.string.data_count, jankenData.paper)

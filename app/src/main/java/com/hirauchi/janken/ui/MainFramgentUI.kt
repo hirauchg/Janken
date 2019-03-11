@@ -20,6 +20,10 @@ class MainFragmentUI : AnkoComponent<MainFragment> {
         const val ROCK = 0
         const val SCISSORS = 1
         const val PAPER = 2
+
+        const val WIN = 10
+        const val LOSE = 11
+        const val DRAW = 12
     }
 
     lateinit var mContext: Context
@@ -99,6 +103,7 @@ class MainFragmentUI : AnkoComponent<MainFragment> {
 
                                         if (v.tag == r) {
                                             toast(mContext.getString(R.string.janken_draw))
+                                            ui.owner.updateData(DRAW, v.tag as Int)
                                             mIsCalling = true
                                             Handler(Looper.getMainLooper()).postDelayed({
                                                 val calls = arrayOf("", mContext.getString(R.string.call_ai), mContext.getString(R.string.call_kode))
@@ -114,22 +119,28 @@ class MainFragmentUI : AnkoComponent<MainFragment> {
                                             ROCK -> {
                                                 if (r == SCISSORS) {
                                                     toast(mContext.getString(R.string.janken_win))
+                                                    ui.owner.updateData(WIN, v.tag as Int)
                                                 } else {
                                                     toast(mContext.getString(R.string.janken_lose))
+                                                    ui.owner.updateData(LOSE, v.tag as Int)
                                                 }
                                             }
                                             SCISSORS -> {
                                                 if (r == ROCK) {
                                                     toast(mContext.getString(R.string.janken_lose))
+                                                    ui.owner.updateData(LOSE, v.tag as Int)
                                                 } else {
                                                     toast(mContext.getString(R.string.janken_win))
+                                                    ui.owner.updateData(WIN, v.tag as Int)
                                                 }
                                             }
                                             PAPER -> {
                                                 if (r == ROCK) {
                                                     toast(mContext.getString(R.string.janken_win))
+                                                    ui.owner.updateData(WIN, v.tag as Int)
                                                 } else {
                                                     toast(mContext.getString(R.string.janken_lose))
+                                                    ui.owner.updateData(LOSE, v.tag as Int)
                                                 }
                                             }
                                         }
