@@ -101,8 +101,13 @@ class JankenDataFragmentUI : AnkoComponent<JankenDataFragment> {
                 }
 
                 mResetButton = button(R.string.data_reset){
-                    setOnClickListener {
-                        ui.owner.resetData()
+                    setOnClickListener { it ->
+                        alert(R.string.confirm_reset) {
+                            yesButton {
+                                ui.owner.resetData()
+                            }
+                            noButton {}
+                        }.show()
                     }
                 }.lparams {
                     gravity = Gravity.CENTER_HORIZONTAL

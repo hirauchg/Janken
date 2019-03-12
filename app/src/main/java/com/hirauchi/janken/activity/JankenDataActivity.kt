@@ -13,6 +13,13 @@ class JankenDataActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         JankenDataActivityUI().setContentView(this)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         fragmentManager.beginTransaction().replace(R.id.Container, JankenDataFragment()).commit()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return super.onSupportNavigateUp()
     }
 }
