@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">가위바위보</string>
+    <string name="highest_win_count">최고 연승 수：%1$d회</string>
+    <string name="now_win_count">현재 연승 수：%1$d회</string>
+    <string name="call_jan">가위</string>
+    <string name="call_ken">바위</string>
+    <string name="call_pon">보</string>
+    <string name="call_ai">가위</string>
+    <string name="call_kode">바위</string>
+    <string name="call_sho">보</string>
+    <string name="button_data">데이터</string>
+    <string name="button_janken">가위바위보</string>
+    <string name="janken_win">승리</string>
+    <string name="janken_lose">패배</string>
+    <string name="janken_draw">무승부</string>
+    <string name="data_title">데이터</string>
+    <string name="data_total">%1$d차전　%2$d승%3$d패</string>
+    <string name="data_highest_win_title">최고 연승 수</string>
+    <string name="data_draw_title">무승부 비율</string>
+    <string name="data_win_rate_title">승률</string>
+    <string name="data_separate">：</string>
+    <string name="data_count">%1$d회</string>
+    <string name="data_persent">%1$d％</string>
+    <string name="data_use_hand_title">－ 사용 횟수 －</string>
+    <string name="data_reset">재설정</string>
+    <string name="confirm_reset">재설정 하시겠습니까？</string>
+</resources>

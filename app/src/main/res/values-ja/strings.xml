@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Janken</string>
+    <string name="highest_win_count">最高連勝数：%1$d回</string>
+    <string name="now_win_count">現在連勝数：%1$d回</string>
+    <string name="call_jan">じゃん</string>
+    <string name="call_ken">けん</string>
+    <string name="call_pon">ぽん</string>
+    <string name="call_ai">あい</string>
+    <string name="call_kode">こで</string>
+    <string name="call_sho">しょ</string>
+    <string name="button_data">データ</string>
+    <string name="button_janken">じゃんけん</string>
+    <string name="janken_win">勝ち</string>
+    <string name="janken_lose">負け</string>
+    <string name="janken_draw">あいこ</string>
+    <string name="data_title">ジャンケンデータ</string>
+    <string name="data_total">%1$d戦　%2$d勝%3$d敗</string>
+    <string name="data_highest_win_title">最高連勝数</string>
+    <string name="data_draw_title">あいこ数</string>
+    <string name="data_win_rate_title">勝率</string>
+    <string name="data_separate">：</string>
+    <string name="data_count">%1$d回</string>
+    <string name="data_persent">%1$d％</string>
+    <string name="data_use_hand_title">－ 使用回数 －</string>
+    <string name="data_reset">リセット</string>
+    <string name="confirm_reset">リセットしてよろしいですか？</string>
+</resources>

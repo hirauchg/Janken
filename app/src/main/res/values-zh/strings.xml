@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">剪刀石头布</string>
+    <string name="highest_win_count">高连胜：%1$d次</string>
+    <string name="now_win_count">连胜数：%1$d次</string>
+    <string name="call_jan">剪刀</string>
+    <string name="call_ken">石头</string>
+    <string name="call_pon">布</string>
+    <string name="call_ai">剪刀</string>
+    <string name="call_kode">石头</string>
+    <string name="call_sho">布</string>
+    <string name="button_data">数据</string>
+    <string name="button_janken">剪刀石头布</string>
+    <string name="janken_win">胜</string>
+    <string name="janken_lose">失去</string>
+    <string name="janken_draw">平局</string>
+    <string name="data_title">数据</string>
+    <string name="data_total">%1$d场战斗　%2$d胜%3$d输了</string>
+    <string name="data_highest_win_title">高连胜</string>
+    <string name="data_draw_title">提取率</string>
+    <string name="data_win_rate_title">赢率</string>
+    <string name="data_separate">：</string>
+    <string name="data_count">%1$d次</string>
+    <string name="data_persent">%1$d％</string>
+    <string name="data_use_hand_title">－ 使用次数 －</string>
+    <string name="data_reset">重置</string>
+    <string name="confirm_reset">您确定要重置吗？</string>
+</resources>

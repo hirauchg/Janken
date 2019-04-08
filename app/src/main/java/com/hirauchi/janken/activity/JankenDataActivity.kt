@@ -14,6 +14,7 @@ class JankenDataActivity : AppCompatActivity() {
         JankenDataActivityUI().setContentView(this)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = getString(R.string.data_title)
 
         fragmentManager.beginTransaction().replace(R.id.Container, JankenDataFragment()).commit()
     }

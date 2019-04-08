@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Piedra, papel o tijera</string>
+    <string name="highest_win_count">Alta racha ganadora : %1$d veces</string>
+    <string name="now_win_count">Número de victorias consecutivas : %1$d veces</string>
+    <string name="call_jan">Piedra</string>
+    <string name="call_ken">Papel</string>
+    <string name="call_pon">Tijera</string>
+    <string name="call_ai">Piedra</string>
+    <string name="call_kode">Papel</string>
+    <string name="call_sho">Tijera</string>
+    <string name="button_data">Los datos</string>
+    <string name="button_janken">Empezar</string>
+    <string name="janken_win">Ganar</string>
+    <string name="janken_lose">Perdiendo</string>
+    <string name="janken_draw">Dibujar</string>
+    <string name="data_title">Los datos</string>
+    <string name="data_total">%1$d batallas　%2$d victorias %3$d perdidas</string>
+    <string name="data_highest_win_title">Alta racha ganadora</string>
+    <string name="data_draw_title">Tasa de dibujo</string>
+    <string name="data_win_rate_title">Tasa de ganar</string>
+    <string name="data_separate">：</string>
+    <string name="data_count">%1$d veces</string>
+    <string name="data_persent">%1$d％</string>
+    <string name="data_use_hand_title">－ Recuento de uso －</string>
+    <string name="data_reset">Restablecer</string>
+    <string name="confirm_reset">¿Estás seguro de que quieres restablecerlo?</string>
+</resources>
