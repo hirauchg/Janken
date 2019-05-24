@@ -37,6 +37,8 @@ class MainFragmentUI : AnkoComponent<MainFragment> {
     lateinit var mJankenHandler: Handler
     lateinit var mJankenRunnable: Runnable
 
+    var mIsDraw: Boolean = false
+
     var mIsCalling: Boolean = false
 
     override fun createView(ui: AnkoContext<MainFragment>) = with(ui) {
@@ -91,7 +93,11 @@ class MainFragmentUI : AnkoComponent<MainFragment> {
                                 when (event.action) {
                                     MotionEvent.ACTION_DOWN -> {
                                         mJankenHandler.removeCallbacks(mJankenRunnable)
-                                        mCallTextView.text = mContext.getString(R.string.call_pon)
+                                        if (mIsDraw) {
+                                            mCallTextView.text = mContext.getString(R.string.call_sho)
+                                        } else {
+                                            mCallTextView.text = mContext.getString(R.string.call_pon)
+                                        }
 
                                         val r = Random().nextInt(3)
 
@@ -102,6 +108,7 @@ class MainFragmentUI : AnkoComponent<MainFragment> {
                                         }
 
                                         if (v.tag == r) {
+                                            mIsDraw = true
                                             toast(mContext.getString(R.string.janken_draw))
                                             ui.owner.updateData(DRAW, v.tag as Int)
                                             mIsCalling = true
@@ -112,6 +119,8 @@ class MainFragmentUI : AnkoComponent<MainFragment> {
                                             }, 1000)
                                             return@setOnTouchListener true
                                         }
+
+                                        mIsDraw = false
 
                                         mJankenButton.isClickable = true
 
